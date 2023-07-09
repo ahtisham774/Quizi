@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/images/logo.png" type="image/x-icon">
+    <title>QUIZI | Result 🎉✨</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+
+    <nav
+        class="flex items-center fixed top-o z-10 w-full flex-col gap-4 justify-between bg-white sm:flex-row  shadow-lg p-6">
+        <div class="flex w-full sm:w-auto justify-between items-center">
+            <div class="flex items-center flex-shrink-0 text-white mr-6">
+                <img src="/assets/images/mainLogo.png" class="h-8 w-auto" alt="logo">
+            </div>
+            <div class="block sm:hidden">
+                <button
+                    class="flex items-center px-3 py-2 border-1 bg-[var(--primary)] text-white  rounded text-teal-200 border-[var(--primary)] hover:text-white hover:border-[var(--primary)]"
+                    id="menu-btn">
+                    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <title>Menu</title>
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="w-full hidden   flex-col items-center justify-center sm:relative sm:flex sm:flex-row sm:flex-grow"
+            id="menu-item">
+            <div class="text-sm flex flex-col justify-center items-center flex-grow  sm:flex-row  ">
+                <a href="/index.html"
+                    class="line relative text-lg block mt-4 lg:inline-block lg:mt-0 hover:text-[var(--primary-light)] mr-0 sm:mr-4">
+                    Home
+                </a>
+                <a href="/quiz-results.html"
+                    class="line relative text-lg  block mt-4 lg:inline-block lg:mt-0 hover:text-[var(--primary-light)] mr-0 sm:mr-4">
+                    Quizzes
+                </a>
+                <a href="/about.html"
+                    class="line relative text-lg block mt-4 lg:inline-block lg:mt-0 hover:text-[var(--primary-light)]">
+                    About
+                </a>
+            </div>
+            <div class="w-full p-2 sm:w-auto sm:p-0 ">
+                <a href="#" id="logout"
+                    class="inline-block text-lg w-full text-center sm:w-auto px-4 py-2 leading-none border-[var(--primary)]  border rounded-xl hover:bg-[var(--primary)] hover:text-white hover:border-white transition-all delay-150 text-[var(--primary)]  mt-4 lg:mt-0">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <!-- show user name , email and questions with red background of wrong answers and green background of correct answers -->
+    <div class="w-full flex flex-col justify-center items-center gap-2 px-4 pt-28">
+
+        <fieldset
+            class="flex flex-col-reverse gap-10 justify-center sm:flex-row sm:gap-0 sm:justify-between items-center border border-[var(--primary)] rounded-xl p-4 px-0 sm:px-8 w-full hidden" id="quiz_info">
+            <legend class="text-xl font-bold m-3 p-1 text-[var(--primary)]">Result</legend>
+            <div class="flex flex-col  items-start justify-center gap-4" id="info">
+
+            </div>
+
+
+
+            <div class="flex items-center flex-wrap max-w-md px-10 bg-white shadow-xl rounded-2xl h-20"
+                x-data="{ circumference: 50 * 2 * Math.PI, percent: 0 }" id="percent">
+                <div class="flex items-center justify-center -m-6 overflow-hidden bg-white rounded-full">
+                    <svg class="w-32 h-32 transform translate-x-1 translate-y-1" x-cloak aria-hidden="true">
+                        <circle class="text-gray-300" stroke-width="10" stroke="currentColor" fill="transparent" r="50"
+                            cx="60" cy="60" />
+                        <circle class="text-[var(--primary)]" stroke-width="10" :stroke-dasharray="circumference"
+                            :stroke-dashoffset="circumference - percent / 100 * circumference" stroke-linecap="round"
+                            stroke="currentColor" fill="transparent" r="50" cx="60" cy="60" />
+                        <animate attributeName="stroke-dashoffset" begin="0s" dur="1s" from="circumference"
+                            to="circumference - percent / 100 * circumference" fill="freeze"></animate>
+                    </svg>
+                    <span class="absolute text-2xl text-[var(--primary)]" x-text="`${percent}%`"></span>
+                </div>
+                <p class="ml-10 font-medium text-gray-600 sm:text-xl hidden sm:block">Performance</p>
+            </div>
+
+        </fieldset>
+
+        <div class="w-full flex flex-col justify-center items-center" id="show_questions"></div>
+
+    </div>
+
+    <div class="fixed bottom-0  right-0 sm:right-8 p-4 z-10">
+        <a href="index.html"
+            class="flex items-center justify-center  w-14 h-14 rounded-full bg-[var(--primary-light)] hover:bg-[var(--primary)]">
+            <!-- home SVG -->
+            <svg class="w-10 h-10 text-[var(--secondary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001
+           1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0
+           011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                </path>
+            </svg>
+        </a>
+    </div>
+
+
+
+    <script src="js/result/script.js"></script>
+    <script>
+        document.querySelectorAll('a').forEach(tag => {
+            tag.addEventListener('click', () => {
+                localStorage.removeItem('activePanel')
+                localStorage.removeItem('activeDiv')
+            })
+        })
+    </script>
+</body>
+
+</html>

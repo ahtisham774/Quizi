@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/images/logo.png" type="image/x-icon">
+    <title>QUIZI | Quiz</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+
+    <nav class="flex items-center w-full flex-col gap-4 justify-between bg-white sm:flex-row  shadow-lg p-6">
+        <div class="flex w-full sm:w-auto justify-between items-center">
+            <div class="flex items-center flex-shrink-0 text-white mr-6">
+                <img src="/assets/images/mainLogo.png" class="h-8 w-auto" alt="logo">
+            </div>
+            <div class="block sm:hidden">
+                <button
+                    class="flex items-center px-3 py-2 border-1 bg-[var(--primary)] text-white  rounded text-teal-200 border-[var(--primary)] hover:text-white hover:border-[var(--primary)]"
+                    id="menu-btn">
+                    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <title>Menu</title>
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="w-full hidden   flex-col items-center justify-center sm:relative sm:flex sm:flex-row sm:flex-grow"
+            id="menu-item">
+            <div class="text-sm flex flex-col justify-center items-center flex-grow  sm:flex-row  ">
+                <a href="/"
+                    class="line relative  text-lg  block mt-4 lg:inline-block lg:mt-0 hover:text-[var(--primary-light)] mr-0 sm:mr-4">
+                    Home
+                </a>
+                <a href="/quiz-results.html"
+                    class="line relative text-lg  block mt-4 lg:inline-block lg:mt-0 hover:text-[var(--primary-light)] mr-0 sm:mr-4">
+                    Quizzes
+                </a>
+                <a href="#responsive-header"
+                    class="line relative   text-lg block mt-4 lg:inline-block lg:mt-0 hover:text-[var(--primary-light)]">
+                    About
+                </a>
+            </div>
+            <div class="w-full p-2 sm:w-auto sm:p-0 ">
+                <a href="#" id="logout"
+                    class="inline-block text-lg  w-full text-center sm:w-auto px-4 py-2 leading-none border-[var(--primary)]  border rounded-xl hover:bg-[var(--primary)] hover:text-white hover:border-white transition-all delay-150 text-[var(--primary)]  mt-4 lg:mt-0">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="pt-5 sm:pt-28">
+        <!-- display quiz questions -->
+        <div class="relative" id="quiz_block">
+            <div class="flex flex-col justify-center items-center gap-3" id="quiz_title">
+
+            </div>
+            <div class="flex  w-full justify-center items-center overflow-hidden" id="show-quiz">
+
+
+
+
+            </div>
+            <div class="flex p-3 justify-center gap-x-3 w-full hidden" id="buttons">
+                <button
+                    class="inline-block w-full text-center sm:w-auto text-sm px-4 py-2 leading-none border-[var(--primary)]  border rounded-xl hover:bg-[var(--primary)] hover:text-white hover:border-white transition-all delay-150 text-[var(--primary)]  mt-4 lg:mt-0"
+                    id="prev">Previous</button>
+                <button
+                    class="inline-block w-full text-center sm:w-auto text-sm px-4 py-2 leading-none text-white  rounded-xl hover:bg-[var(--primary)]  transition-all delay-150 bg-[var(--primary-light)]  mt-4 lg:mt-0"
+                    id="next">Next</button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <script src="/js/quiz/script.js"></script>
+</body>
+
+</html>

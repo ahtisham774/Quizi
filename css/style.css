@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+  @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400&display=swap');
+
+:root{
+    --primary:#0f2c41;
+    --primary-light:#14354d;
+    --secondary:#6bd5d0;
+
+    --text-alert-success:#76be59;
+    --bg-alert-success:#ecf5e7 ;
+
+    --text-alert-danger:#d13334;
+    --bg-alert-danger:#f9e0e0;
+
+    --text-alert-warning:#f7b924;
+    --bg-alert-warning:#fff3cd;
+
+
+    --font:'Prompt', sans-serif;
+}
+@layer base {
+    html {
+      font-family: var(--font) !important;
+    }
+  }
+
+
+
+  .toast{
+    border-radius: .3125rem !important;
+    font-family: var(--font) !important;
+    width: max-content !important;
+  }
+
+  .error{
+    background:var(--bg-alert-danger) !important;
+    color: var(--text-alert-danger) !important;
+    
+  }
+  .error .toast-close{
+    color:var(--text-alert-danger) !important;
+    margin-left: .3125rem !important;
+  }
+  .success{
+    background:var(--bg-alert-success) !important;
+    color:  var(--text-alert-success) !important;
+   
+  }
+  .success .toast-close{
+    color:var(--text-alert-success) !important;
+    margin-left: .3125rem !important;
+  }
+
+    .warning{
+        background:var(--bg-alert-warning) !important;
+        color:  var(--text-alert-warning) !important;
+      
+    }
+    .warning .toast-close{
+        color:var(--text-alert-warning) !important;
+        margin-left: .3125rem !important;
+    }
+
+    @media screen and (max-width:400px) {
+
+        .toast{
+            max-width: 100% !important;
+        }
+    }
+
+
+    /* scrollbar */
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+        background: var(--secondary);
+    }
+    ::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius:.625rem;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-light);
+    }
+    ::-webkit-scrollbar-thumb:active {
+        background: var(--primary);
+    }
+    ::-webkit-scrollbar-corner {
+        background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-resizer {
+        background: #f1f1f1;
+    }
+
+  .fade-in{
+
+    animation-name: fadeIn ;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transition: opacity 1s ease-in-out;
+  }
+  @keyframes fadeIn {
+    from {
+        opacity: 0;
+        }
+        to{
+            opacity: 1;
+        }
+  }
+
+  #try-now::before{
+    content: '';
+    position: absolute;
+    height: 200%;
+    top: 0;
+    left: -1px;
+    z-index: -1;
+    transform: skew(45deg);
+    background:var(--secondary);
+    transition: width .9s ease-in-out;
+    
+
+  }
+
+
+  #try-now:hover::before{
+    animation-name: try;
+    animation-duration: 1s;
+    animation-fill-mode:both;
+   
+
+  }
+
+  @keyframes try {
+    0% {
+        width: 0;
+        }
+        100%{
+            width: 125%;
+        }
+  }
+
+  .line::before{
+    content:'';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom:-2px;
+    left: 0;
+    border-radius:5px;
+    background: var(--primary-light);
+    transition: width .9s ease-in-out;
+  }
+  .active.line::before{
+    width: 100%;
+    
+}
+  .line:hover::before{
+    animation-name: line;
+    animation-duration: .9s;
+    animation-fill-mode:both;
+  }
+  @keyframes line {
+    0% {
+        width: 0;
+        }
+        100%{
+            width: 100%;
+        }
+  }
+
+    @media screen and (max-width: 640px) {
+        .active.line::before{
+            width: 0;
+        }
+    }

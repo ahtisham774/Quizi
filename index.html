@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/images/logo.png" type="image/x-icon">
+    <title>QUIZI | Home</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+
+    <header
+        class="flex flex-col items-center justify-center h-[100dvh] sm:h-[100lvh]  sm:h-screen bg-[url('/assets/images/hero.webp')] bg-no-repeat bg-center bg-cover bg-fixed">
+
+        <nav
+            class="flex items-center fixed top-0 w-full flex-col gap-4 z-10 justify-between bg-white sm:flex-row    shadow-lg p-6">
+            <div class="flex w-full sm:w-auto justify-between items-center">
+                <div class="flex items-center flex-shrink-0 text-white mr-6">
+                    <img src="/assets/images/mainLogo.png" class="h-8 w-auto" alt="logo">
+                </div>
+                <div class="block sm:hidden">
+                    <button
+                        class="flex items-center px-3 py-2 border-1 bg-[var(--primary)] text-white  rounded text-teal-200 border-[var(--primary)] hover:text-white hover:border-[var(--primary)]"
+                        id="menu-btn">
+                        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <title>Menu</title>
+                            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="w-full hidden flex-col items-center  transition-[translate] ease-in-out delay-[3s]  sm:translate-y-0 justify-center sm:relative sm:flex sm:flex-row sm:flex-grow"
+                id="menu-item">
+                <div class="text-sm flex flex-col justify-center items-center flex-grow  sm:flex-row  ">
+                    <a href="/"
+                        class="active line relative text-lg block mt-4 text-center lg:inline-block lg:mt-0 hover:text-[var(--primary-light)] mr-0 sm:mr-4">
+                        Home
+                    </a>
+                    <a href="/quiz-results.html"
+                        class="line relative text-lg  block mt-4 lg:inline-block lg:mt-0 hover:text-[var(--primary-light)] mr-0 sm:mr-4">
+                        Quizzes
+                    </a>
+                    <a href="/about.html"
+                        class="line relative text-lg block mt-4 text-center lg:inline-block lg:mt-0 hover:text-[var(--primary-light)]">
+                        About
+                    </a>
+                </div>
+                <div class="w-full p-2 sm:w-auto sm:p-0 ">
+                    <a href="#" id="logout"
+                        class="text-lg inline-block w-full text-center sm:w-auto px-4 py-2 leading-none border-[var(--primary)]  border rounded-xl hover:bg-[var(--primary)] hover:text-white hover:border-white transition-all delay-150 text-[var(--primary)]  mt-4 lg:mt-0">Logout</a>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="flex  w-full justify-center items-center " id="main-div">
+
+            <section id="main" class="w-full">
+                <div class="flex flex-col items-center justify-center ">
+                    <div class="flex flex-col items-center justify-center">
+                        <h1 class="text-[var(--primary)]  text-2xl sm:text-5xl text-center font-bold transition-all fade-in"
+                            id="user"></h1>
+                        <h1
+                            class="text-[var(--primary)]  text-md sm:text-4xl text-center font-bold transition-all fade-in">
+                            Welcome to Quizi</h1>
+                        <p class="text-[var(--primary)] text-sm sm:text-xl font-bold transition-all">Let's get started
+                        </p>
+                    </div>
+                    <div class="flex flex-col items-center justify-center mt-0 sm:mt-8 transition-all">
+                        <a href="#start-quiz" id="start"
+                            class="inline-block w-full text-center sm:w-auto text-sm px-4 py-2 leading-none border-[var(--primary)]  border rounded-xl hover:bg-[var(--primary)]  hover:text-white hover:border-white transition-all delay-150 text-[var(--primary)]  mt-4 lg:mt-0" >Start
+                            Quiz</a>
+                    </div>
+                </div>
+            </section>
+            <section id="start-quiz" class="hidden">
+                <div class="flex flex-col items-center justify-center ">
+
+                    <div class="flex flex-col pt-18 sm:pt-0 items-center justify-between">
+                        <div class="flex items-center  max-w-md  px-10  my-10 bg-white shadow-xl rounded-full h-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 cursor-pointer" id="back"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                    d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                        </div>
+                        <h1
+                            class="text-[var(--primary)] fade-in text-2xl sm:text-5xl text-center font-bold transition-all">
+                            Let's get started</h1>
+
+                        <div class="flex  items-center flex-col justify-center mt-0 sm:mt-8 gap-2 transition-all">
+                            <label class="font-bold" for="category">Select Category: </label>
+                            <select name="category"
+                                class="appearance-none cursor-pointer bg-gray-50 border border-[var(--primary)] text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="any" selected>Any Category</option>
+                                <option value="9">General Knowledge</option>
+                                <option value="10">Entertainment: Books</option>
+                                <option value="11">Entertainment: Film</option>
+                                <option value="12">Entertainment: Music</option>
+                                <option value="13">Entertainment: Musicals &amp; Theatres</option>
+                                <option value="14">Entertainment: Television</option>
+                                <option value="15">Entertainment: Video Games</option>
+                                <option value="16">Entertainment: Board Games</option>
+                                <option value="17">Science &amp; Nature</option>
+                                <option value="18">Science: Computers</option>
+                                <option value="19">Science: Mathematics</option>
+                                <option value="20">Mythology</option>
+                                <option value="21">Sports</option>
+                                <option value="22">Geography</option>
+                                <option value="23">History</option>
+                                <option value="24">Politics</option>
+                                <option value="25">Art</option>
+                                <option value="26">Celebrities</option>
+                                <option value="27">Animals</option>
+                                <option value="28">Vehicles</option>
+                                <option value="29">Entertainment: Comics</option>
+                                <option value="30">Science: Gadgets</option>
+                                <option value="31">Entertainment: Japanese Anime &amp; Manga</option>
+                                <option value="32">Entertainment: Cartoon &amp; Animations</option>
+                            </select>
+
+                            <label class="font-bold" for="difficulty">Select Difficulty: </label>
+                            <select name="difficulty"
+                                class="appearance-none cursor-pointer bg-gray-50 border border-[var(--primary)] text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="any">Any Difficulty</option>
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+
+                            <label class="font-bold" for="type">Select Type: </label>
+                            <div class="flex justify-between  w-full">
+                                <div class="flex justify-between  gap-x-2">
+                                    <label for="multiple">MCQs</label>
+                                    <input type="radio" name="type" class="accent-[var(--primary)] cursor-pointer" id="multiple"
+                                        value="multiple" checked>
+                                </div>
+                                <div class="flex justify-between gap-x-2">
+                                    <label for="boolean">True/False</label>
+                                    <input type="radio" name="type" class="accent-[var(--primary)] cursor-pointer" id="boolean" value="boolean">
+                                </div>
+                            </div>
+
+                            <div class="flex justify-center w-full py-2">
+                                <button type="submit" id="generate-quiz"
+                                    class=" w-full bg-[var(--primary)] text-white px-4 py-2 rounded-lg hover:bg-[var(--primary)] hover:text-white transition-all delay-150">Generate
+                                    Quiz</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+    </header>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

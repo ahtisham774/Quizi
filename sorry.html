@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/images/logo.png" type="image/x-icon">
+    <title>QUIZI | Apologize 😞</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+
+    <header
+        class="flex flex-col items-center justify-center h-[100dvh] sm:h-[100lvh]  sm:h-screen bg-[url('/assets/images/hero.webp')] bg-no-repeat bg-center bg-cover bg-fixed">
+
+        <nav
+            class="flex items-center fixed top-0 w-full flex-col gap-4 justify-between bg-white sm:flex-row  shadow-lg p-6">
+            <div class="flex w-full sm:w-auto justify-between items-center">
+                <div class="flex items-center flex-shrink-0 text-white mr-6">
+                    <img src="/assets/images/mainLogo.png" class="h-8 w-auto" alt="logo">
+                </div>
+                <div class="block sm:hidden">
+                    <button
+                        class="flex items-center px-3 py-2 border-1 bg-[var(--primary)] text-white  rounded text-teal-200 border-[var(--primary)] hover:text-white hover:border-[var(--primary)]"
+                        id="menu-btn">
+                        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <title>Menu</title>
+                            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="w-full hidden   flex-col items-center justify-center sm:relative sm:flex sm:flex-row sm:flex-grow"
+                id="menu-item">
+                <div class="text-sm flex flex-col justify-center items-center flex-grow  sm:flex-row  ">
+                    <a href="/"
+                        class="line relative text-lg text-center block mt-4 lg:inline-block lg:mt-0 hover:text-[var(--primary-light)] mr-0 sm:mr-4">
+                        Home
+                    </a>
+                    <a href="/quiz-results.html"
+                        class="line relative text-lg  block mt-4 lg:inline-block lg:mt-0 hover:text-[var(--primary-light)] mr-0 sm:mr-4">
+                        Quizzes
+                    </a>
+                    <a href="/about.html"
+                        class="line relative text-lg text-center block mt-4 lg:inline-block lg:mt-0 hover:text-[var(--primary-light)]">
+                        About
+                    </a>
+                </div>
+                <div class="w-full p-2 sm:w-auto sm:p-0 ">
+                    <a href="#" id="logout"
+                        class="inline-block text-lg w-full text-center sm:w-auto px-4 py-2 leading-none border-[var(--primary)]  border rounded-xl hover:bg-[var(--primary)] hover:text-white hover:border-white transition-all delay-150 text-[var(--primary)]  mt-4 lg:mt-0">Logout</a>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="flex  w-full justify-center items-center ">
+
+            <section>
+                <div class="w-full h-full ">
+                    <!-- thanks for attempting the quiz do you want to see your result -->
+                    <div class="flex justify-center h-full w-full items-center flex-col gap-4 " id="result">
+                        <div class="block text-center">
+                            😞 <h1 class="text-2xl font-bold">Apologies, but we currently do not have a quiz available
+                                on that particular topic.</h1>
+                            <h>Please feel free to explore our other quizzes or check back later for updates. </h1>
+                        </div>
+
+
+                        <div class="flex justify-center items-center gap-x-3">
+                            <p class="leading-none text-[var(--primary)] cursor-pointer hover:underline hover:underline-offset-8 transition-all"
+                                id="goto">Go to Home</p>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+        <div class="fixed bottom-0 sm:bottom-12 right-0 sm:right-8 p-4 z-10">
+            <a href="index.html"
+                class="flex items-center justify-center  w-14 h-14 rounded-full bg-[var(--primary-light)] hover:bg-[var(--primary)]">
+                <!-- home SVG -->
+                <svg class="w-10 h-10 text-[var(--secondary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001
+               1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0
+               011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                    </path>
+                </svg>
+            </a>
+        </div>
+
+    </header>
+
+    <script>
+        document.getElementById('goto').addEventListener('click', () => {
+            window.location.href = '/index.html'
+
+        })
+        document.getElementById('menu-btn').addEventListener('click', () => {
+            document.getElementById('menu-item').classList.toggle('hidden')
+        })
+
+        document.getElementById('logout').addEventListener('click', () => {
+            localStorage.removeItem('user');
+            sessionStorage.removeItem('user');
+            window.location.href = '/login.html'
+        })
+
+    </script>
+    <script>
+        document.querySelectorAll('a').forEach(tag => {
+            tag.addEventListener('click', () => {
+                localStorage.removeItem('activePanel')
+                localStorage.removeItem('activeDiv')
+            })
+        })
+    </script>
+
+</body>
+
+</html>
