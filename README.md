@@ -16,6 +16,11 @@ Features
 -   Responsive design for seamless usage on different devices.
 -   Customizable quiz content and categories.
 
+
+Screenshot
+--------
+![66565627-b6dd-4b1f-879a-8a5b7820f36e](https://github.com/ahtisham774/Quizi/assets/77314350/a4ebf5fd-920d-420a-9256-0ca6807dcb67)
+
 Installation
 ------------
 
