@@ -59,10 +59,11 @@ function fetchQuiz(type, category, difficulty) {
     document.getElementsByTagName('section')[0].classList.add('fixed', 'top-1/2', 'translate-y-96')
     document.getElementsByTagName('section')[0].classList.remove('pt-40')
     const loader = document.createElement('div')
-    loader.classList.add('flex', 'justify-center', 'items-center')
+    loader.classList.add('flex', 'justify-center', 'items-center','gap-3')
     loader.setAttribute('id', 'loader')
     loader.innerHTML = `
-    <div class="loader flex justify-center items-center text-[var(--primary)] ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32">Loading...</div>
+   <h1 class='text-2xl'>Loading</h1>
+<span class="loading loading-dots loading-lg"></span>
     `
     document.getElementsByTagName('section')[0].appendChild(
         loader
