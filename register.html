@@ -25,11 +25,21 @@
                     <form class="space-y-4 md:space-y-6" onsubmit="handleRegister(event)">
                         <div>
                             <label for="username" class="block mb-2 text-sm font-medium text-[var(--primary)] ">Your Username</label>
-                            <input type="text" name="username" id="username" class="bg-white border-2 border-gray-300 placeholder-gray-500 shadow-md text-[var(--primary)] sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="john Doe" required="">
+                            <input type="text" name="username" id="username" class="text-md text-[var(--primary-light)] block px-3 py-2 rounded-lg w-full 
+                            bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md
+                            focus:placeholder-gray-500
+                            focus:bg-white 
+                            focus:border-gray-600  
+                            focus:outline-none" placeholder="john Doe" required="">
                         </div>
                         <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-[var(--primary)]">Your email</label>
-                            <input type="email" name="email" id="email" class="bg-white border-2 border-gray-300 placeholder-gray-500 shadow-md text-[var(--primary)] sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="name@company.com" required="">
+                            <input type="email" name="email" id="email" class="text-md text-[var(--primary-light)] block px-3 py-2 rounded-lg w-full 
+                            bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md
+                            focus:placeholder-gray-500
+                            focus:bg-white 
+                            focus:border-gray-600  
+                            focus:outline-none" placeholder="name@company.com" required="">
                         </div>
                         
                         <div class="py-2" x-data="{ show: true }">

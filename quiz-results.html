@@ -7,8 +7,6 @@
     <link rel="shortcut icon" href="/assets/images/logo.png" type="image/x-icon">
     <title>QUIZI | Attempt Quizzes 🎉✨</title>
     <link rel="stylesheet" href="/css/style.css">
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
-
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
@@ -32,7 +30,7 @@
                 </button>
             </div>
         </div>
-        <div class="w-full hidden   flex-col items-center justify-center sm:relative sm:flex sm:flex-row sm:flex-grow"
+        <div class="w-full hidden flex-col items-center justify-center sm:relative sm:flex sm:flex-row sm:flex-grow"
             id="menu-item">
             <div class="text-sm flex flex-col justify-center items-center flex-grow  sm:flex-row  ">
                 <a href="/index.html"
@@ -81,14 +79,6 @@
 
 
     <script src="js/quiz-results/script.js"></script>
-    <script>
-        document.querySelectorAll('a').forEach(tag => {
-            tag.addEventListener('click', () => {
-                localStorage.removeItem('activePanel')
-                localStorage.removeItem('activeDiv')
-            })
-        })
-    </script>
 </body>
 
 </html>

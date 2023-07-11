@@ -31,6 +31,7 @@ onload = () => {
     } else {
        
         alert('Please attempt Quiz first')
+        localStorage.setItem('activeDiv','start-quiz')
         window.location.href = '/index.html'
 
     }

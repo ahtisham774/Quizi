@@ -72,12 +72,12 @@ onload = () => {
            
         })
     })
-   
+    document.getElementById('attempt_quiz') &&  document.getElementById('attempt_quiz').addEventListener('click', () => {
+        localStorage.setItem('activeDiv', 'start-quiz')
+    })
 
 }
-document.getElementById('attempt_quiz').addEventListener('click', () => {
-    localStorage.setItem('activeDiv', 'start-quiz')
-})
+
 function displayResult(quizzes, div) {
 
     quizzes.sort((a, b) => {
@@ -142,11 +142,18 @@ function getDifficultyClass(difficulty) {
     }
 }
 
-document.getElementById('menu-btn').addEventListener('click', () => {
+document.getElementById('menu-btn').addEventListener('click',()=>{
+
     document.getElementById('menu-item').classList.toggle('hidden')
 })
 
 document.getElementById('logout').addEventListener('click', () => {
     localStorage.removeItem('user');
     window.location.href = '/login.html'
+})
+document.querySelectorAll('a').forEach(tag => {
+    tag.addEventListener('click', () => {
+        localStorage.removeItem('activePanel')
+        localStorage.removeItem('activeDiv')
+    })
 })

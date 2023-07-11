@@ -56,14 +56,12 @@ function fetchQuiz(type, category, difficulty) {
     if (difficulty) {
         url += `&difficulty=${difficulty}`
     }
-    document.getElementsByTagName('section')[0].classList.add('fixed', 'top-1/2', 'translate-y-96')
-    document.getElementsByTagName('section')[0].classList.remove('pt-40')
     const loader = document.createElement('div')
-    loader.classList.add('flex', 'justify-center', 'items-center','gap-3')
+    loader.classList.add('flex', 'justify-center', 'items-center','gap-3','bg-white')
     loader.setAttribute('id', 'loader')
     loader.innerHTML = `
-   <h1 class='text-2xl'>Loading</h1>
-<span class="loading loading-dots loading-lg"></span>
+   <h1 class='text-2xl text-[var(--primary)]'>Loading</h1>
+<span class="loading loading-dots loading-lg bg-[var(--primary)]"></span>
     `
     document.getElementsByTagName('section')[0].appendChild(
         loader
@@ -94,8 +92,6 @@ function fetchQuiz(type, category, difficulty) {
                         date: ''
                     }
                     localStorage.setItem('quiz', JSON.stringify(quiz))
-                    document.getElementsByTagName('section')[0].classList.remove('fixed', 'top-1/2', 'translate-y-96')
-                    document.getElementsByTagName('section')[0].classList.add('pt-40')
                     document.getElementById('loader').classList.add('hidden')
                     displayQuiz()
                 }
@@ -201,7 +197,7 @@ function displayQuiz() {
         category = category.split(':')[1]
     }
     document.getElementById('quiz_title').innerHTML = `
-    <h1 class='text-xl font-black sm:text-4xl'>Title: ${category} ${subCategory ? `<small class="text-sm">(${subCategory})</small>` : ''}</h1>
+    <h1 class='text-xl font-black dark:text-[var(--primary)] sm:text-4xl'>Title: ${category} ${subCategory ? `<small class="text-sm">(${subCategory})</small>` : ''}</h1>
     `
 
 }
