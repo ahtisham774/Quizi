@@ -66,19 +66,18 @@ onload = () => {
     document.querySelectorAll('#quiz').forEach(div => {
         div.addEventListener('click', () => {
             const index = parseInt(div.getAttribute('qz-id'))
-            console.log(index)
             const quiz = attemptQuizzes[index]
             localStorage.setItem('quiz', JSON.stringify(quiz))
             window.location.href = '/result.html'
-            console.log(quiz)
+           
         })
     })
-    document.getElementById('attempt_quiz').addEventListener('click', () => {
-        localStorage.setItem('activeDiv', 'start-quiz')
-    })
+   
 
 }
-
+document.getElementById('attempt_quiz').addEventListener('click', () => {
+    localStorage.setItem('activeDiv', 'start-quiz')
+})
 function displayResult(quizzes, div) {
 
     quizzes.sort((a, b) => {

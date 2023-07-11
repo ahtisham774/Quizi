@@ -5,9 +5,9 @@ onload = () => {
     }
 
     const quiz = JSON.parse(localStorage.getItem('quiz'))
-    console.log(quiz)
+  
     if (quiz) {
-        console.log('quiz')
+        
         const score = quiz.score;
         const total = 10;
       
@@ -16,8 +16,7 @@ onload = () => {
 
 
         var animationInterval = setInterval(()=> {
-        
-          console.log('Percent',percent)
+         
           document.getElementById('percent').setAttribute('x-data', `{circumference: 50 * 2 * Math.PI, percent: ${timer}}`)
           
  
@@ -26,25 +25,19 @@ onload = () => {
           }
           timer+=1;
         },30); 
-        // document.getElementById('percent').setAttribute('x-data', `{circumference: 50 * 2 * Math.PI, percent: ${percent}}`)
+        
         displayResult(quiz, user)
         displayQuestions(quiz)
     } else {
-        console.log('no quiz')
+       
         alert('Please attempt Quiz first')
         window.location.href = '/index.html'
 
     }
 
-    // fetchQuiz(type, category, difficulty) 
-
-
-
 
 }
-document.getElementById('info').addEventListener('load', () => {
-    console.log('Element Load')
-})
+
 function displayResult(quiz, user) {
     let resultDiv = document.getElementById('info')
     let date = quiz.date
@@ -92,29 +85,27 @@ function displayQuestions(quiz) {
     let questionsDiv = document.getElementById('show_questions')
     questionsDiv.innerHTML = ''
     const type = quiz.type
-    console.log(type)
 
     questions.map((question) => {
 
-        const answers = [...question.incorrect_answers, question.correct_answer]
+        let answers = [...question.incorrect_answers, question.correct_answer]
         let index = questions.indexOf(question)
-
+        const answerObjects = [...answers].map((answer, index) => ({ text: answer, index })).sort(() => Math.random() - 0.5);
         let str = ''
-
         if (type === 'multiple') {
             str = `
             <div class="flex flex-col gap-3 items-start justify-start w-full">
-            <div  class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm ${checkOption(user_answers[index].selectedAnswer, answers[0], question.correct_answer)}">
-                            ${answers[0]}
+            <div  class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm ${checkOption(user_answers[index].selectedAnswer, answerObjects[0].text, question.correct_answer)}">
+                            ${answerObjects[0].text}
                         </div>
-                        <div class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm ${checkOption(user_answers[index].selectedAnswer, answers[1], question.correct_answer)}">
-                            ${answers[1]}
+                        <div class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm ${checkOption(user_answers[index].selectedAnswer, answerObjects[1].text, question.correct_answer)}">
+                            ${answerObjects[1].text}
                         </div>
-                        <div class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm ${checkOption(user_answers[index].selectedAnswer, answers[2], question.correct_answer)}">
-                            ${answers[2]}
+                        <div class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm ${checkOption(user_answers[index].selectedAnswer, answerObjects[2].text, question.correct_answer)}">
+                            ${answerObjects[2].text}
                         </div>
-                        <div class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm ${checkOption(user_answers[index].selectedAnswer, answers[3], question.correct_answer)}">
-                            ${answers[3]}
+                        <div class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm ${checkOption(user_answers[index].selectedAnswer, answerObjects[3].text, question.correct_answer)}">
+                            ${answerObjects[3].text}
                         </div>
             </div>
                         `
@@ -122,29 +113,29 @@ function displayQuestions(quiz) {
         else {
             str = `
             <div class="flex gap-3 items-center justify-center w-full">
-            <div  class="flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm ${checkOption(user_answers[index].selectedAnswer, answers[0], question.correct_answer)}">
-                            ${answers[0]}
+            <div  class="flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm ${checkOption(user_answers[index].selectedAnswer, answerObjects[0].text, question.correct_answer)}">
+                            ${answerObjects[0].text}
                         </div>
-                        <div class="flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm ${checkOption(user_answers[index].selectedAnswer, answers[1], question.correct_answer)}">
-                            ${answers[1]}
+                        <div class="flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm ${checkOption(user_answers[index].selectedAnswer, answerObjects[1].text, question.correct_answer)}">
+                            ${answerObjects[1].text}
                         </div>
             </div>     
             `
         }
-
+        
         const questionDiv = document.createElement('div')
         questionDiv.classList.add('w-full', 'relative', 'flex', 'flex-col', 'items-center', 'justify-center', 'p-4', 'my-4', 'border-2', 'rounded-md', 'py-8')
         questionDiv.innerHTML = `
         <div class="flex flex-col items-center justify-center w-full">
             <div class="inline-flex items-center justify-center w-full ">
-                <hr class="w-64 h-px my-8 bg-gray-300 border-0 dark:bg-gray-700">
-                <span class="absolute px-3 font-bold text-gray-900 -translate-x-1/5 bg-white dark:bg-gray-800">Question ${questions.indexOf(question) + 1}</span>
+                <hr class="w-64 h-px my-8 bg-gray-300 border-0 ">
+                <span class="absolute px-3 font-bold text-gray-900 -translate-x-1/5 bg-white">Question ${questions.indexOf(question) + 1}</span>
             </div>
             <div class="w-full flex flex-col items-center justify-center">
-                <h1 class="text-lg text-center  text-gray-900 dark:text-white">${question.question}</h1>
+                <h1 class="text-lg text-center  text-gray-900 ">${question.question}</h1>
                 <div class="flex flex-col items-center justify-center w-full">
-                    <hr class="w-72 h-px my-8 bg-gray-300 border-0 dark:bg-gray-700">
-                    <span class="absolute px-3 font-bold text-gray-900 -translate-x-1/5 bg-white dark:bg-gray-800">Answers</span>
+                    <hr class="w-72 h-px my-8 bg-gray-300 border-0">
+                    <span class="absolute px-3 font-bold text-gray-900 -translate-x-1/5 bg-white">Answers</span>
                 </div>
                 <div class="w-full sm:w-7/12 flex flex-col items-start justify-start ">
                   
@@ -193,7 +184,6 @@ function updateStatus(user_answer, questions) {
 
 
 function checkOption(user_answer, option_answer, correct_answer) {
-    let status = document.getElementById('status')
     if (user_answer === correct_answer && option_answer === user_answer) {
 
         return 'bg-green-300';

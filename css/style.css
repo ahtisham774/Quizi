@@ -78,15 +78,17 @@
 
     /* scrollbar */
     ::-webkit-scrollbar {
-        width: 10px;
-        height: 10px;
+        width: 20px;
+        
     }
     ::-webkit-scrollbar-track {
-        background: var(--secondary);
+        background: #fff;
+
+     
     }
     ::-webkit-scrollbar-thumb {
         background: var(--primary);
-        border-radius:.625rem;
+        border-radius:1rem;
     }
     ::-webkit-scrollbar-thumb:hover {
         background: var(--primary-light);
@@ -95,10 +97,10 @@
         background: var(--primary);
     }
     ::-webkit-scrollbar-corner {
-        background: #f1f1f1;
+        background: #ffff;
     }
     ::-webkit-scrollbar-resizer {
-        background: #f1f1f1;
+        background: #ffff;
     }
 
   .fade-in{

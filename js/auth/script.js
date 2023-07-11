@@ -29,7 +29,7 @@ function handleLogin(e){
             localStorage.setItem('user', JSON.stringify(user));
           
             showToast(
-                "Login Successfull",
+                "Login Successful",
                 "success",
                 function(){
                     window.location.href = '/index.html'
