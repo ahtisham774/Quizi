@@ -1,9 +1,6 @@
 onload = () => {
     let user = JSON.parse(localStorage.getItem('user'));
     if (!user) {
-        user = JSON.parse(sessionStorage.getItem('user'));
-    }
-    if (!user) {
         window.location.href = '/login.html'
     }
 
@@ -214,6 +211,5 @@ document.getElementById('menu-btn').addEventListener('click',()=>{
 
 document.getElementById('logout').addEventListener('click',()=>{
     localStorage.removeItem('user');
-    sessionStorage.removeItem('user');
     window.location.href = '/login.html'
 })

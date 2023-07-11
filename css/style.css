@@ -3,6 +3,10 @@
 @tailwind utilities;
   @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400&display=swap');
 
+
+
+
+
 :root{
     --primary:#0f2c41;
     --primary-light:#14354d;
@@ -23,6 +27,7 @@
 @layer base {
     html {
       font-family: var(--font) !important;
+
     }
   }
 

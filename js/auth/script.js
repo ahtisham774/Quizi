@@ -1,11 +1,8 @@
 
 
 onload = ()=>{
-    console.log('Document Load')
+    
     let user = JSON.parse(localStorage.getItem('user'));
-    if (!user) {
-        user = JSON.parse(sessionStorage.getItem('user'));
-    }
     if (user) {
         window.location.href = '/index.html'
     }
@@ -17,7 +14,6 @@ function handleLogin(e){
 
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
-    let rememberMe = document.getElementById('remember').checked;
     
     const user = findUser(email)
     if(!user){
@@ -29,12 +25,9 @@ function handleLogin(e){
     }
     else{
         if(user.password === password){
-            if(rememberMe){
-                localStorage.setItem('user', JSON.stringify(user));
-            }
-            else{
-                sessionStorage.setItem('user', JSON.stringify(user));
-            }
+          
+            localStorage.setItem('user', JSON.stringify(user));
+          
             showToast(
                 "Login Successfull",
                 "success",

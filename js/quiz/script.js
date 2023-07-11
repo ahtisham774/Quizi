@@ -2,9 +2,6 @@ onload = () => {
     console.log('Document Load')
     let user = JSON.parse(localStorage.getItem('user'));
     if (!user) {
-        user = JSON.parse(sessionStorage.getItem('user'));
-    }
-    if (!user) {
         window.location.href = '/login.html'
     }
 
@@ -17,21 +14,21 @@ onload = () => {
 
     const quiz = JSON.parse(localStorage.getItem('quiz'))
     var quizzes = JSON.parse(localStorage.getItem('quizzes'))
-    console.log('quizzes: ',quizzes)
+    console.log('quizzes: ', quizzes)
     !quizzes && (quizzes = [])
-    console.log('current user quizzes: ',quizzes.filter((q) => q.email == user.email))
+    console.log('current user quizzes: ', quizzes.filter((q) => q.email == user.email))
     user_quizzes = quizzes.filter((q) => q.email == user.email)
-        if(user_quizzes.length === 0){
-            user_quizzes = {
-                username:JSON.parse(localStorage.getItem('user')).username,
-                email: JSON.parse(localStorage.getItem('user')).email,
-                quizzes: []
-            }
-            quizzes.push(user_quizzes)
-            localStorage.setItem('quizzes', JSON.stringify(quizzes))
+    if (user_quizzes.length === 0) {
+        user_quizzes = {
+            username: JSON.parse(localStorage.getItem('user')).username,
+            email: JSON.parse(localStorage.getItem('user')).email,
+            quizzes: []
         }
-   
-    
+        quizzes.push(user_quizzes)
+        localStorage.setItem('quizzes', JSON.stringify(quizzes))
+    }
+
+
     if (quiz) {
         console.log(quiz)
         if (quiz.type == type && quiz.category == category && quiz.difficulty == difficulty) {
@@ -65,7 +62,20 @@ function fetchQuiz(type, category, difficulty) {
     if (difficulty) {
         url += `&difficulty=${difficulty}`
     }
+    console.log(document.getElementsByTagName('section')[0])
+    document.getElementsByTagName('section')[0].classList.add('fixed', 'top-1/2', 'translate-y-96')
+    document.getElementsByTagName('section')[0].classList.remove('pt-40')
+    const loader = document.createElement('div')
+    loader.classList.add('flex', 'justify-center', 'items-center')
+    loader.setAttribute('id', 'loader')
+    loader.innerHTML = `
+    <div class="loader flex justify-center items-center text-[var(--primary)] ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32">Loading...</div>
+    `
+    document.getElementsByTagName('section')[0].appendChild(
+        loader
+    )
     try {
+
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -89,12 +99,14 @@ function fetchQuiz(type, category, difficulty) {
                         score: 0,
                         date: ''
                     }
-                   
                     localStorage.setItem('quiz', JSON.stringify(quiz))
+                    document.getElementsByTagName('section')[0].classList.remove('fixed', 'top-1/2', 'translate-y-96')
+                    document.getElementsByTagName('section')[0].classList.add('pt-40')
+                    document.getElementById('loader').classList.add('hidden')
                     displayQuiz()
                 }
                 else {
-                    // window.location.href = '/sorry.html'
+                    window.location.href = '/sorry.html'
                 }
             }).catch(err => console.log('error', err))
     }
@@ -113,33 +125,44 @@ function displayQuiz() {
 
         const shuffledAnswers = answers.sort(() => Math.random() - 0.5)
         let str = ''
-
+    //         < button  q-id = ${ questions.indexOf(question) } a - id='${0}' id = "answers"class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm hover:bg-[var(--primary-light)] hover:text-white focus:outline-none focus:bg-[var(--primary-light)] focus:text-white focus:ring-offset-2 focus:ring-[var(--primary)]" >
+    //             ${ answers[0] }
+    // </ >
+    // <button q-id = ${questions.indexOf(question)} a-id='${1}' id="answers"class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm hover:bg-[var(--primary-light)] hover:text-white focus:outline-none focus:bg-[var(--primary-light)] focus:text-white focus:ring-offset-2 focus:ring-[var(--primary)]">
+    //     ${answers[1]}
+    // </button>
+    // <button q-id = ${questions.indexOf(question)} a-id='${2}' id="answers"class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm hover:bg-[var(--primary-light)] hover:text-white focus:outline-none focus:bg-[var(--primary-light)] focus:text-white  focus:ring-offset-2 focus:ring-[var(--primary)]">
+    //     ${answers[2]}
+    // </button>
+    // <button q-id = ${questions.indexOf(question)} a-id='${3}' id="answers"class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm hover:bg-[var(--primary-light)] hover:text-white focus:outline-none focus:bg-[var(--primary-light)] focus:text-white bfocus:ring-offset-2 focus:ring-[var(--primary)]">
+    //     ${answers[3]}
+    // </button>
         if (type === 'multiple') {
             str = `
             <div class="flex flex-col gap-3 items-center justify-center w-full  fade-in" id="answers_group">
-            <button  q-id = ${questions.indexOf(question)} a-id='${answers.indexOf(shuffledAnswers[0])}' id="answers"class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm hover:bg-[var(--primary-light)] hover:text-white focus:outline-none focus:bg-[var(--primary-light)] focus:text-white focus:ring-offset-2 focus:ring-[var(--primary)]">
-                            ${shuffledAnswers[0]}
-                        </button>
-                        <button q-id = ${questions.indexOf(question)} a-id='${answers.indexOf(shuffledAnswers[1])}' id="answers"class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm hover:bg-[var(--primary-light)] hover:text-white focus:outline-none focus:bg-[var(--primary-light)] focus:text-white focus:ring-offset-2 focus:ring-[var(--primary)]">
-                            ${shuffledAnswers[1]}
-                        </button>
-                        <button q-id = ${questions.indexOf(question)} a-id='${answers.indexOf(shuffledAnswers[2])}' id="answers"class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm hover:bg-[var(--primary-light)] hover:text-white focus:outline-none focus:bg-[var(--primary-light)] focus:text-white  focus:ring-offset-2 focus:ring-[var(--primary)]">
-                            ${shuffledAnswers[2]}
-                        </button>
-                        <button q-id = ${questions.indexOf(question)} a-id='${answers.indexOf(shuffledAnswers[3])}' id="answers"class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm hover:bg-[var(--primary-light)] hover:text-white focus:outline-none focus:bg-[var(--primary-light)] focus:text-white bfocus:ring-offset-2 focus:ring-[var(--primary)]">
-                            ${shuffledAnswers[3]}
-                        </button>
+            ${
+                shuffledAnswers.map((answer,index) => {
+                    return `
+                    <button  q-id = ${ questions.indexOf(question) } a-id='${index}' id ="answers" class="w-full flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm hover:bg-[var(--primary-light)] hover:text-white focus:outline-none focus:bg-[var(--primary-light)] focus:text-white focus:ring-offset-2 focus:ring-[var(--primary)]" >
+                        ${ answer }
+                    </button> 
+                    ` 
+                }
+                )
+                }
+           
             </div>
-                        `
+            `
+                        
         }
         else {
             str = `
             <div class="flex gap-3 items-center justify-center w-full fade-in" id="answers_group">
-            <button  q-id = ${questions.indexOf(question)} a-id='${answers.indexOf(shuffledAnswers[0])}' id="answers"class="flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm hover:bg-[var(--primary-light)] hover:text-white focus:outline-none focus:bg-[var(--primary-light)] focus:text-white focus:ring-offset-2 focus:ring-[var(--primary)]">
-                            ${shuffledAnswers[0]}
+            <button  q-id = ${questions.indexOf(question)} a-id='${0}' id="answers"class="flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm hover:bg-[var(--primary-light)] hover:text-white focus:outline-none focus:bg-[var(--primary-light)] focus:text-white focus:ring-offset-2 focus:ring-[var(--primary)]">
+                            ${answers[0]}
                         </button>
-                        <button q-id = ${questions.indexOf(question)} a-id='${answers.indexOf(shuffledAnswers[1])}' id="answers"class="flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm hover:bg-[var(--primary-light)] hover:text-white focus:outline-none focus:bg-[var(--primary-light)] focus:text-white focus:ring-offset-2 focus:ring-[var(--primary)]">
-                            ${shuffledAnswers[1]}
+                        <button q-id = ${questions.indexOf(question)} a-id='${1}' id="answers"class="flex items-center justify-center px-4 py-2 text-base font-medium  border border-[var(--primary)]  bg-white text-[var(--primary)] rounded-md shadow-sm hover:bg-[var(--primary-light)] hover:text-white focus:outline-none focus:bg-[var(--primary-light)] focus:text-white focus:ring-offset-2 focus:ring-[var(--primary)]">
+                            ${answers[1]}
                         </button>
             </div>     
             `
@@ -147,7 +170,7 @@ function displayQuiz() {
 
         const questionDiv = document.createElement('div')
         questionDiv.classList.add('w-full', 'flex', 'flex-col', 'items-center', 'justify-center', 'p-4', 'my-4')
-        questionDiv.setAttribute('id',`div-${questions.indexOf(question)}`)
+        questionDiv.setAttribute('id', `div-${questions.indexOf(question)}`)
         questionDiv.innerHTML = `
         <div class=" relative flex flex-col items-center justify-center">
             <div class="inline-flex items-center justify-center w-full ">
@@ -176,7 +199,7 @@ function displayQuiz() {
     let activePanel = localStorage.getItem('activePanel')
 
     document.querySelectorAll('#show-quiz > div').forEach((div) => div.classList.add('hidden'))
-    
+
     if (activePanel) {
         console.log(activePanel)
         activePanel === '#div-0' && document.querySelector('#prev').classList.add('hidden')
@@ -184,22 +207,22 @@ function displayQuiz() {
         document.querySelector(`#show-quiz > ${activePanel}`).classList.remove('hidden')
     }
     else {
-        
+
         document.querySelector('#show-quiz > #div-0').classList.remove('hidden')
         localStorage.setItem('activePanel', '#div-0')
         document.querySelector('#prev').classList.add('hidden')
     }
     document.getElementById('buttons').classList.remove('hidden')
     let category = JSON.parse(localStorage.getItem('quiz')).category === 'any' ? 'Random Quiz' : questions[0].category
-    let subCategory = null ;
-    if(category.includes(':')){
+    let subCategory = null;
+    if (category.includes(':')) {
         subCategory = category.split(':')[0]
         category = category.split(':')[1]
-    } 
+    }
     document.getElementById('quiz_title').innerHTML = `
-    <h1 class='text-xl font-black sm:text-4xl'>Title: ${category} ${subCategory  ? `<small class="text-sm">(${subCategory})</small>`:''}</h1>
+    <h1 class='text-xl font-black sm:text-4xl'>Title: ${category} ${subCategory ? `<small class="text-sm">(${subCategory})</small>` : ''}</h1>
     `
-   
+
 }
 function markAnswers() {
     const answers = JSON.parse(localStorage.getItem('quiz')).user_answers
@@ -228,29 +251,28 @@ document.getElementById('next').addEventListener('click', () => {
 
     console.log('next Click')
     if (document.getElementById('next').innerText === 'Submit') {
-        console.log('Submitted')
+
         const quiz_answers = JSON.parse(localStorage.getItem('quiz')).questions
         const u_answers = JSON.parse(localStorage.getItem('quiz')).user_answers
         let score = 0
-        console.log(quiz_answers)
         for (let i = 0; i < quiz_answers.length; i++) {
             if (quiz_answers[i].correct_answer === u_answers[i].selectedAnswer) {
                 score += 1
             }
         }
-        console.log(score)
+
         let getQuiz = JSON.parse(localStorage.getItem('quiz'))
         getQuiz.score = score
         getQuiz.date = new Date().toLocaleString()
         //get quiz of current user
         let temQuizzes = JSON.parse(localStorage.getItem('quizzes'))
-        temQuizzes.map((quiz)=>{
-           
-            if(quiz.email === JSON.parse(localStorage.getItem('user')).email){
+        temQuizzes.map((quiz) => {
+
+            if (quiz.email === JSON.parse(localStorage.getItem('user')).email) {
                 quiz.quizzes.push(getQuiz)
             }
         })
-        
+
         // temQuizzes.quizzes.push(getQuiz)
         localStorage.setItem('quizzes', JSON.stringify(temQuizzes))
         localStorage.setItem('quiz', JSON.stringify(getQuiz))
@@ -259,7 +281,7 @@ document.getElementById('next').addEventListener('click', () => {
     }
     else {
         const questions = document.querySelectorAll('#show-quiz > div')
-       
+
         //get div with active class
         let active = null
         let activeIndex = -1
@@ -267,7 +289,7 @@ document.getElementById('next').addEventListener('click', () => {
             if (!questions[i].classList.contains('hidden')) {
                 active = questions[i]
                 activeIndex = i
-                localStorage.setItem('activePanel',`#${questions[i+1].getAttribute('id')}`)
+                localStorage.setItem('activePanel', `#${questions[i + 1].getAttribute('id')}`)
                 break
             }
         }
@@ -294,7 +316,7 @@ document.getElementById('prev').addEventListener('click', () => {
         if (!questions[i].classList.contains('hidden')) {
             active = questions[i]
             activeIndex = i
-            localStorage.setItem('activePanel',`#${questions[i-1].getAttribute('id')}`)
+            localStorage.setItem('activePanel', `#${questions[i - 1].getAttribute('id')}`)
             break
         }
     }
@@ -311,19 +333,21 @@ document.querySelector('#show-quiz').addEventListener('click', (e) => {
     if (e.target.closest('button')) {
         const questionNumber = parseInt(e.target.closest("button").getAttribute('q-id'))
         const answer = e.target.closest("button").getAttribute('a-id')
+        console.log('Answer Id:', answer)
         const quiz = JSON.parse(localStorage.getItem('quiz'))
         const answers = [...quiz.questions[questionNumber].incorrect_answers, quiz.questions[questionNumber].correct_answer]
         let user_answers = quiz.user_answers
+        console.log('Answer:', answers[answer])
         user_answers[questionNumber].selectedAnswer = answers[answer]
         localStorage.setItem('quiz', JSON.stringify(quiz))
         let children;
         document.querySelectorAll('#show-quiz > div').forEach(div => !div.classList.contains('hidden') && (children = div.querySelector('div > div ~ div > #answers_group').children))
-        console.log('children:',children)
+        console.log('children:', children)
         for (let i = 0; i < children.length; i++) {
             children[i].classList.remove('bg-[var(--primary-light)]', 'text-white')
             children[i].classList.add('bg-white', 'text-[var(--primary-light)]')
         }
-        console.log('target option:',e.target.closest("button"))
+        console.log('target option:', e.target.closest("button"))
         e.target.closest("button").classList.add('bg-[var(--primary-light)]', 'text-white')
         e.target.closest("button").classList.remove('text-[var(--primary-light)]', 'bg-white')
 
@@ -332,19 +356,18 @@ document.querySelector('#show-quiz').addEventListener('click', (e) => {
 
 })
 
-  document.getElementById('menu-btn').addEventListener('click',()=>{
+document.getElementById('menu-btn').addEventListener('click', () => {
     document.getElementById('menu-item').classList.toggle('hidden')
 })
 
-document.getElementById('logout').addEventListener('click',()=>{
+document.getElementById('logout').addEventListener('click', () => {
     localStorage.removeItem('user');
-    sessionStorage.removeItem('user');
     window.location.href = '/login.html'
 })
 
-const links = document.querySelectorAll('#menu-item a').forEach(tag=>{
+const links = document.querySelectorAll('#menu-item a').forEach(tag => {
     console.log(tag)
-    tag.addEventListener('click',()=>{
+    tag.addEventListener('click', () => {
         localStorage.removeItem('activePanel')
         localStorage.removeItem('activeDiv')
     })
