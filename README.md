@@ -57,7 +57,7 @@ Contributions to the Quizi App project are welcome! If you encounter any bugs, h
 License
 -------
 
-The Quizi App is open-source software licensed under the [MIT License](https://opensource.org/licenses/MIT).
+The Quizi App is open-source software licensed under the [EPL 2.0  license](https://opensource.org/license/epl-2-0/).
 
 Acknowledgements
 ----------------
